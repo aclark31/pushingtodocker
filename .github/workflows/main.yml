@@ -1,0 +1,19 @@
+name: my application
+
+on:
+  push:
+   branches: main
+
+      
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build & Push Image
+      run: |
+        echo "${{ secrets.DOCKERPW }}" | docker login -u "aclark31" --password-stdin
+        docker image build -t aclark31/testubuntu:v1 .
+        docker push aclark31/testubuntu:v1
